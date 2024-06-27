@@ -1,0 +1,23 @@
+{
+  "name": "blogging-app",
+  "version": "1.0.0",
+  "description": "A Blogging App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "style": "npx tailwindcss -i ./Public/CSS/input.css -o ./Public/CSS/output.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.4",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}

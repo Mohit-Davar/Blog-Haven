@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Haven</title>
+    <!-- <link rel="stylesheet" href="/CSS/output.css"> -->
+</head>
+<body>
+    <h1>SignUp Page</h1>
+    <form action="/user/signup" method="post">
+        <label for="firstName">First Name</label>
+        <input type="text" name="first_Name" id="firstName">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="last_Name" id="lastName">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <button type="submit">Submit</button>
+    </form>
+    <% if (locals.msg) { %>
+     <p><%= msg %></p>
+    <% } %>
+</body>
+</html>
+
