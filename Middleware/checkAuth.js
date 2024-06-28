@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 const JWTMiddleware = (req, res, next) => {
     const token = req.cookies.token
     if (!token) {
-        return res.status(401).redirect(`/user/signup`)
+        return res.status(401).redirect(`/user/login`)
     }
     try {
         const decodedPayload = jwt.verify(token, "Blog_Haven")

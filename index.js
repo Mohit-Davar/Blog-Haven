@@ -38,6 +38,8 @@ const staticRouter = require('./Routes/staticRoutes.js')
 app.use("/", staticRouter)
 const userRouter = require('./Routes/userRoutes.js')
 app.use("/user", userRouter)
+const blogRouter = require("./Routes/blogRoutes.js")
+app.use("/blogs", JWTMiddleware, blogRouter)
 
 //connecting MongoDB
 const { connectToMongoDB } = require("./connection.js")

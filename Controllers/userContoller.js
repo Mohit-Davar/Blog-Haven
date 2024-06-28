@@ -16,7 +16,7 @@ async function handleUserSignUp(req, res) {
         })
         const token = JWTGeneration(body.email)
         res.cookie("token", token)
-        return res.status(201).redirect("/")
+        return res.status(201).redirect("/blogs")
     } catch (error) {
         if (error.code === 11000) { // MongoDB duplicate key error
             req.flash('error', 'Email Already Exists')
@@ -44,7 +44,7 @@ async function handleUserSignIn(req, res) {
         }
         const token = JWTGeneration(body.email)
         res.cookie("token", token)
-        return res.redirect(`/`)
+        return res.redirect(`/blogs`)
     } catch (err) {
         req.flash('error', 'Internal Server Error')
         return res.redirect(`/user/login`)

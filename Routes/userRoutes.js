@@ -1,4 +1,4 @@
-// Acquiring Express and making 'app' handler function
+// Acquiring Express
 const express = require("express")
 const router = express.Router()
 
@@ -6,10 +6,6 @@ const { handleUserSignUp, handleUserSignIn } = require("../Controllers/userConto
 // SignUp Route
 router.route("/signup")
     .get((req, res) => {  // GET METHOD
-        // const { message } = req.query;
-        // res.render("signup", {
-        //     msg: message
-        // })
         res.status(200).render("signup")
     })
     .post(handleUserSignUp) //POST METHOD

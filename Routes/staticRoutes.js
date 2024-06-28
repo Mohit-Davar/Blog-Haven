@@ -1,9 +1,9 @@
-// Acquiring Express and making 'app' handler function
+// Acquiring Express 
 const express = require("express")
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.send("<h1>Home Page</h1>")
+    return res.render('home')
 })
 router.get("/contact",(req,res)=>{
     res.send("<h1>Contact Us Page</h1></h1>")
