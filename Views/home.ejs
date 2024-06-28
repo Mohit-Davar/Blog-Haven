@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/output.css">
     <title>Blog Haven</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Welcome To Blog Haven</h1>
+    <div class="conatiner w-full relative">
+        <nav class="w-full sticky top-0 flex items-center justify-around px-5 text-xl bg-white text-white font-Playwrite">
+            <img src="/Images/LogoOne.png" alt="Logo" class="w-32 logo">
+            <div class="sections flex gap-10">
+                <a href="/blogs"
+                    class="bg-theme-two px-4 py-2 rounded-3xl shadow-button hover:shadow-none transition-shadow duration-500">Blogs</a>
+                <a href="/contact"
+                    class="bg-theme-two px-4 py-2 rounded-3xl shadow-button hover:shadow-none transition-shadow duration-500">Contact
+                    Us</a>
+            </div>
+            <a href="/user/signup"
+                class="buttons bg-theme-two px-4 py-2 rounded-3xl hover:shadow-buttonTwo duration-500">SignUp</a>
+        </nav>
+        <main>
+            <div class="heroSection flex">
+                <div class="right w-1/2 h-full flex flex-col gap-10 justify-center ps-10 font-Playwrite">
+                    <div class="heading text-3xl">
+                        <p>Welcome to <span
+                                class="text-theme-two underline decoration-theme-one underline-offset-8 font-Lobster">Blog
+                                Haven</span></p>
+                    </div>
+                    <div class="text text-lg">
+                        At Blog Haven, we believe in the <span class="text-theme-one">power</span> of words to inspire,
+                        inform, and ignite
+                        <span class="text-theme-one">curiosity</span>. Dive into a diverse collection of articles
+                        crafted by <span class="text-theme-one">passionate</span> writers from around
+                        the globe. Whether you're seeking the latest trends, timeless wisdom, or a fresh perspective,
+                        you'll find your haven here.
+                    </div>
+                    <div class="button">
+                        <a href="/user/signup" class="bg-theme-two px-4 py-2 rounded-3xl text-white">Discover</a>
+                    </div>
+                </div>
+                <div class="left w-1/2">
+                    <img src="/Images/HeroSection.jpg" alt="BlogImage">
+                </div>
+            </div>
+            <div class="categories flex flex-col gap-5 items-center  py-10">
+
+                <p class="text-2xl text-center font-Roboto ">Blogs from different Categories</p>
+
+                <div class="categories-container flex flex-wrap gap-5 justify-center">
+                </div>
+            </div>
+        </main>
+        <footer class="bg-black text-white text-center py-2 px-5">
+            Made with ❤️ by Mohit
+        </footer>
+    </div>
 </body>
+<script src="/JS/home.js"></script>
 </html>

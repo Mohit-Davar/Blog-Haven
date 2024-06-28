@@ -10,7 +10,7 @@ const JWTMiddleware = (req, res, next) => {
         next()
     } catch (err) {
         req.flash('error', 'Internal Server Error: Signup or Login Again')
-        return res.redirect(`/user/signup`)
+        return res.redirect(`/user/login`)
     }
 }
 module.exports = {
