@@ -11,11 +11,16 @@
     <h1>Login Page</h1>
     <form action="/user/login" method="post">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="email" required>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" required>
         <button type="submit">Submit</button>
     </form>
+    <% if (locals.error) { %>
+        <p>
+            <%= error %>
+        </p>
+        <% } %>
 </body>
 
 </html>

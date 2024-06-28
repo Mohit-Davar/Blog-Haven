@@ -1,19 +1,41 @@
 // Acquiring Express and making 'app' handler function
 const express = require("express")
 const app = express()
+
 const PORT = 8080
+
+// Acquiring Additional Packages
 const path = require("path")
+const cookieParser = require('cookie-parser')
+const session = require("express-session")
+const flash = require("connect-flash")
 
 //Middleware Pluggins
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'Public')))
+// Set up session middleware
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true
+}));
+// Set up flash middleware
+app.use(flash());
+// Make flash messages available in templates
+app.use((req, res, next) => {
+    res.locals.error = req.flash('error');
+    next();
+});
+
 
 //Middlewares
 const { createLog } = require("./Middleware/log.js")
+const { JWTMiddleware } = require("./Middleware/checkAuth.js")
 
 // ROUTES
 const staticRouter = require('./Routes/staticRoutes.js')
-app.use("/", createLog, staticRouter)
+app.use("/", staticRouter)
 const userRouter = require('./Routes/userRoutes.js')
 app.use("/user", userRouter)
 
