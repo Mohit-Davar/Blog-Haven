@@ -21,9 +21,10 @@
 
 <body>
     <div class="conatiner w-full relative">
-        <nav class="w-full sticky top-0 flex items-center justify-around px-5 text-xl bg-white text-white font-Playwrite">
+        <nav
+            class="w-full sticky top-0 flex items-center justify-around px-5 text-xl bg-white text-white font-Playwrite">
             <img src="/Images/LogoOne.png" alt="Logo" class="w-32 logo">
-            <div class="sections flex gap-10">
+            <div class="sections hidden sm:flex gap-10">
                 <a href="/blogs"
                     class="bg-theme-two px-4 py-2 rounded-3xl shadow-button hover:shadow-none transition-shadow duration-500">Blogs</a>
                 <a href="/contact"
@@ -34,8 +35,9 @@
                 class="buttons bg-theme-two px-4 py-2 rounded-3xl hover:shadow-buttonTwo duration-500">SignUp</a>
         </nav>
         <main>
-            <div class="heroSection flex">
-                <div class="right w-1/2 h-full flex flex-col gap-10 justify-center ps-10 font-Playwrite">
+            <div class="heroSection flex lg:flex-row flex-col">
+                <div
+                    class="right w-full h-fit lg:w-1/2 lg:h-full flex flex-col gap-10 justify-center py-5 px-5 font-Playwrite">
                     <div class="heading text-3xl">
                         <p>Welcome to <span
                                 class="text-theme-two underline decoration-theme-one underline-offset-8 font-Lobster">Blog
@@ -53,7 +55,7 @@
                         <a href="/user/signup" class="bg-theme-two px-4 py-2 rounded-3xl text-white">Discover</a>
                     </div>
                 </div>
-                <div class="left w-1/2">
+                <div class="left lg:w-1/2 object-center">
                     <img src="/Images/HeroSection.jpg" alt="BlogImage">
                 </div>
             </div>
@@ -70,5 +72,50 @@
         </footer>
     </div>
 </body>
-<script src="/JS/home.js"></script>
+<script>
+    //Generation of Categories
+    const CategoryContainer = document.querySelector('.categories-container')
+    function generateCategory(url, category, text) {
+        return (
+            CategoryContainer.innerHTML = CategoryContainer.innerHTML + `
+                
+                    <div class="card w-72 h-96 rounded-3xl overflow-hidden">
+                        <div class="img w-full h-3/5 bg-cover bg-center"
+                            style= " background-image: url(/Images/${url}); "></div>
+                        <div class="text w-full h-1/5 px-4 py-2">
+                            <p class="heading text-center text-xl font-Lobster text-theme-two">${category}</p>
+                            <p class="text text-center font-Playwrite">
+                                ${text}
+                            </p>
+                        </div>
+                    </div>
+            `
+        )
+    }
+    //Declaring Class Category
+    class Category {
+        constructor(url, category, text) {
+            this.url = url
+            this.category = category
+            this.text = text
+        }
+    }
+
+    //Database of Different Categories
+    const Categories = [
+        new Category("/Food.jpg", "Food", "Savor the flavors of the world with our easy-to-follow recipes, cooking tips, and culinary inspiration."),
+        new Category("Fitness.jpg", "Fitness", "Transform your health with expert workouts, nutrition tips, and motivational stories to keep you on track."),
+        new Category("Tech.jpeg", "Tech", "Stay ahead of the curve with the latest in technology, gadget reviews, and industry insights."),
+        new Category("Cinema.jpeg", "Movies", "Discover reviews, analysis, and behind-the-scenes insights into the latest films and timeless classics."),
+        new Category("Music.avif", "Songs", "Explore song reviews, artist interviews, and playlists that span genres and moods."),
+        new Category("Electronics.jpg", "Electronics", "Get the latest reviews, comparisons, and insights on mobile phones, laptops and more"),
+        new Category("Travel.avif", "Travel", "Embark on adventures with travel guides, destination reviews, and tips for your next journey."),
+        new Category("Politics.jpeg", "Politics", "Stay informed with analysis, commentary, and updates on the latest political events and issues."),
+    ]
+    Categories.forEach(Categorie => {
+        generateCategory(Categorie.url, Categorie.category, Categorie.text)
+    })
+
+</script>
+
 </html>
