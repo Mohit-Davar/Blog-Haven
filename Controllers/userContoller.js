@@ -34,12 +34,12 @@ async function handleUserSignIn(req, res) {
             email: body.email,
         })
         if (!candidate) {
-            req.flash('error', 'Invalid Email')
+            req.flash('error', 'Wrong Email')
             return res.redirect(`/user/login`)
         }
         const isMatch = await candidate.comparePassword(body.password)
         if (!isMatch) {
-            req.flash('error', 'Invalid Password')
+            req.flash('error', 'Wrong Password')
             return res.redirect(`/user/login`)
         }
         const token = JWTGeneration(body.email)

@@ -6,7 +6,7 @@ const { handleUserSignUp, handleUserSignIn } = require("../Controllers/userConto
 // SignUp Route
 router.route("/signup")
     .get((req, res) => {  // GET METHOD
-        res.status(200).render("signup")
+        return res.status(200).render("signup")
     })
     .post(handleUserSignUp) //POST METHOD
 
@@ -14,7 +14,7 @@ router.route("/signup")
 // LoginIn Route
 router.route("/login")
     .get((req, res) => {  // GET METHOD
-        res.status(200).render("login")
+        return res.status(200).render("login")
     })
     .post(handleUserSignIn) //POST METHOD
 

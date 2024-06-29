@@ -8,7 +8,7 @@ module.exports = {
         "theme-two": "#5ba8b9"
       },
       boxShadow: {
-        "button": "-3px 3px 0px 0px rgb(0,0,0)",
+        "button": "3px 3px 0px 0px rgb(0,0,0)",
         "buttonTwo": "0px 0px 0px 5px rgb(255,255,255) , 0px 0px 0px 10px rgb(91, 168, 185)"
       },
       fontFamily: {
