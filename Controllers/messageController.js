@@ -8,8 +8,7 @@ const handleMessage = async (req, res) => {
         subject: body.subject,
         message: body.message,
     })
-
-    return res.redirect("/")
+    return res.render("success")
 }
 
 module.exports = {

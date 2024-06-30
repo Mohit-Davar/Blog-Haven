@@ -22,8 +22,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    username: {
+    role: {
         type: String,
+        default: 'Earthling 🌏'
+    },
+    bio: {
+        type: String,
+        default: `Hey there! Here's the lowdown on this human: 🍔 Eats food, sometimes too much. 💤 Requires sleep, usually not enough. 📱 Glued to screens, whether for work or memes. 🚶‍♂️ Walks around a lot, often in circles. 🗣️ Talks a bunch, sometimes even listens. 🤔 Thinks about stuff, occasionally has good ideas. Just your everyday Earthling, trying to figure it all out one day at a time.`
+    },
+    profileImg: {
+        type: String,
+        default: 'https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg'
     }
 }, { timestamps: true });
 
@@ -51,7 +60,7 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
     try {
         const isMatch = await bcrypt.compare(candidatePassword, Person.password)
         return isMatch
-    }catch(err){
+    } catch (err) {
         throw new Error(err)
     }
 }

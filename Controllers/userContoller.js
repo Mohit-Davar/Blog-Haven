@@ -5,16 +5,17 @@ const { JWTGeneration } = require("../Services/userAuthentication.js")
 async function handleUserSignUp(req, res) {
     const body = req.body
     try {
-        await user.create({
+        const result = await user.create({
             name: {
                 firstName: body.first_Name,
                 lastName: body.last_Name,
             },
             email: body.email,
             password: body.password,
-            username: `${body.email}-BlogHaven`
+            
         })
-        const token = JWTGeneration(body.email)
+        console.log(result)
+        const token = JWTGeneration(result.toJSON())
         res.cookie("token", token)
         return res.status(201).redirect("/blogs")
     } catch (error) {
@@ -22,6 +23,7 @@ async function handleUserSignUp(req, res) {
             req.flash('error', 'Email Already Exists')
             return res.redirect(`/user/signup`)
         }
+        console.log(error)
         req.flash('error', 'Internal Server Error')
         return res.redirect(`/user/signup`)
     }
@@ -42,7 +44,7 @@ async function handleUserSignIn(req, res) {
             req.flash('error', 'Wrong Password')
             return res.redirect(`/user/login`)
         }
-        const token = JWTGeneration(body.email)
+        const token = JWTGeneration(candidate.toJSON())
         res.cookie("token", token)
         return res.redirect(`/blogs`)
     } catch (err) {
