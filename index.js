@@ -1,8 +1,9 @@
 // Acquiring Express and making 'app' handler function
 const express = require("express")
 const app = express()
+require('dotenv').config()
+const PORT = process.env.PORT;
 
-const PORT = 8080
 
 // Acquiring Additional Packages
 const path = require("path")
@@ -39,7 +40,7 @@ app.use("/", staticRouter)
 const userRouter = require('./Routes/userRoutes.js')
 app.use("/user", userRouter)
 const blogRouter = require("./Routes/blogRoutes.js")
-app.use("/blogs", JWTMiddleware, blogRouter)
+app.use("/blogs", JWTMiddleware, createLog, blogRouter)
 
 //connecting MongoDB
 const { connectToMongoDB } = require("./connection.js")

@@ -1,3 +1,6 @@
+require('dotenv').config()
+const JWTSecretKey = process.env.JWTSecretKey;
+
 const jwt = require("jsonwebtoken")
 const JWTMiddleware = (req, res, next) => {
     const token = req.cookies.token
@@ -5,7 +8,7 @@ const JWTMiddleware = (req, res, next) => {
         return res.status(401).redirect(`/user/login`)
     }
     try {
-        const decodedPayload = jwt.verify(token, "Blog_Haven")
+        const decodedPayload = jwt.verify(token, JWTSecretKey)
         req.userData = decodedPayload
         next()
     } catch (err) {

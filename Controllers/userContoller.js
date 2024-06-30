@@ -12,9 +12,8 @@ async function handleUserSignUp(req, res) {
             },
             email: body.email,
             password: body.password,
-            
+
         })
-        console.log(result)
         const token = JWTGeneration(result.toJSON())
         res.cookie("token", token)
         return res.status(201).redirect("/blogs")
@@ -51,9 +50,25 @@ async function handleUserSignIn(req, res) {
         req.flash('error', 'Internal Server Error')
         return res.redirect(`/user/login`)
     }
+}
 
+async function handleProfileEdit(req, res) {
+    const body = req.body
+    const loggedInUser = req.userData
+    await user.findOneAndUpdate(
+        {
+            email: loggedInUser.email
+        },
+        {
+            role: body.role,
+            bio: body.bio,
+            profileImg: `/Uploads/${req.file.filename}`
+        }
+    )
+    return res.redirect(`/blogs/profile/${loggedInUser.email}`)
 }
 module.exports = {
     handleUserSignUp,
-    handleUserSignIn
+    handleUserSignIn,
+    handleProfileEdit
 }

@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     },
     bio: {
         type: String,
-        default: `Hey there! Here's the lowdown on this human: 🍔 Eats food, sometimes too much. 💤 Requires sleep, usually not enough. 📱 Glued to screens, whether for work or memes. 🚶‍♂️ Walks around a lot, often in circles. 🗣️ Talks a bunch, sometimes even listens. 🤔 Thinks about stuff, occasionally has good ideas. Just your everyday Earthling, trying to figure it all out one day at a time.`
+        default: `Hey there! I am a Human.`
     },
     profileImg: {
         type: String,

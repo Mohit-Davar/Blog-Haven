@@ -2,32 +2,30 @@
 const express = require("express")
 const router = express.Router()
 
-const user = require("../Models/userModel.js")
+const { handleBlogCreation, handleProfile } = require("../Controllers/blogController.js")
+const { handleProfileEdit } = require("../Controllers/userContoller.js")
+const upload = require("../Services/multer.js")
 const blog = require("../Models/blogModel.js")
 
-router.get("/",async (req, res) => {
+router.get("/", async (req, res) => {
     const allBlogs = await blog.find()
     return res.render("blogs", {
         loggedInUser: req.userData,
-        blogs: allBlogs, 
+        blogs: allBlogs,
     })
 })
 
-router.get("/profile/:id", async (req, res) => {
-    const profile = await user.findOne({
-        email: req.params.id
+router.get("/profile/:id", handleProfile)
+
+router.route("/create")
+    .get((req, res) => {
+        return res.render("createform")
     })
-    const allBlogs = await blog.find({
-        createdBy: req.params.id
+    .post(upload.single("file-upload"), handleBlogCreation)
+
+router.route("/edit")
+    .get((req, res) => {
+        return res.render("editform")
     })
-    return res.render("profile", {
-        loggedInUser: profile,
-        blogs: allBlogs
-    })
-})
-router.get("/create", async (req, res) => {
-    return res.render("createform")
-})
-const { handleBlogCreation } = require('../Controllers/blogController.js')
-router.post("/create", handleBlogCreation)
+    .post(upload.single("file-upload"), handleProfileEdit)
 module.exports = router
