@@ -2,20 +2,15 @@
 const express = require("express")
 const router = express.Router()
 
-const { handleBlogCreation, handleProfile } = require("../Controllers/blogController.js")
+const { handleBlogCreation, handleProfile, handleAllBlogs, handleBlog } = require("../Controllers/blogController.js")
 const { handleProfileEdit } = require("../Controllers/userContoller.js")
 const upload = require("../Services/multer.js")
-const blog = require("../Models/blogModel.js")
 
-router.get("/", async (req, res) => {
-    const allBlogs = await blog.find()
-    return res.render("blogs", {
-        loggedInUser: req.userData,
-        blogs: allBlogs,
-    })
-})
+router.get("/", handleAllBlogs)
 
 router.get("/profile/:id", handleProfile)
+
+router.get("/blog/:id", handleBlog)
 
 router.route("/create")
     .get((req, res) => {

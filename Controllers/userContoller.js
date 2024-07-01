@@ -1,7 +1,7 @@
 // importing user model
 const user = require("../Models/userModel.js")
 const { JWTGeneration } = require("../Services/userAuthentication.js")
-
+// function to handle User Signup
 async function handleUserSignUp(req, res) {
     const body = req.body
     try {
@@ -14,7 +14,11 @@ async function handleUserSignUp(req, res) {
             password: body.password,
 
         })
-        const token = JWTGeneration(result.toJSON())
+        const payload = {
+            email: result.email,
+            id: result._id
+        }
+        const token = JWTGeneration(payload)
         res.cookie("token", token)
         return res.status(201).redirect("/blogs")
     } catch (error) {
@@ -27,7 +31,7 @@ async function handleUserSignUp(req, res) {
         return res.redirect(`/user/signup`)
     }
 }
-
+// function to handle user Signin
 async function handleUserSignIn(req, res) {
     const body = req.body
     try {
@@ -43,7 +47,11 @@ async function handleUserSignIn(req, res) {
             req.flash('error', 'Wrong Password')
             return res.redirect(`/user/login`)
         }
-        const token = JWTGeneration(candidate.toJSON())
+        const payload = {
+            email: candidate.email,
+            id: candidate._id
+        }
+        const token = JWTGeneration(payload)
         res.cookie("token", token)
         return res.redirect(`/blogs`)
     } catch (err) {
@@ -51,21 +59,24 @@ async function handleUserSignIn(req, res) {
         return res.redirect(`/user/login`)
     }
 }
-
+// ffuncton to handle profile update
 async function handleProfileEdit(req, res) {
-    const body = req.body
-    const loggedInUser = req.userData
+    const body = req.body;
+    const loggedInUser = req.userData;
+
+    const updateFields = {
+        role: body.role || this.role,
+        bio: body.bio || this.bio
+    };
+    if (req.file) {
+        updateFields.profileImg = `/Uploads/${req.file.filename}`;
+    }
+
     await user.findOneAndUpdate(
-        {
-            email: loggedInUser.email
-        },
-        {
-            role: body.role,
-            bio: body.bio,
-            profileImg: `/Uploads/${req.file.filename}`
-        }
-    )
-    return res.redirect(`/blogs/profile/${loggedInUser.email}`)
+        { email: loggedInUser.email },
+        updateFields
+    );
+    return res.redirect(`/blogs/profile/${loggedInUser.email}`);
 }
 module.exports = {
     handleUserSignUp,

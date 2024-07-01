@@ -51,13 +51,14 @@
                     </li>
                 </ul>
             </div>
-            <form class="items-center hidden gap-x-2 lg:flex">
+            <form class="items-center hidden gap-x-2 lg:flex" method="get" action="/blogs">
                 <div class="relative flex w-full gap-2 md:w-max">
                     <div class="relative h-10 w-full  min-w-[288px]">
-                        <input type="search" placeholder="Search"
+                        <input type="search" placeholder="Search" name="query"
                             class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent !border-t-blue-gray-300 bg-transparent px-3 py-2.5 pl-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder:text-blue-gray-300 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2  focus:!border-blue-gray-300 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" />
                         <label
-                            class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all before:content-none after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all after:content-none peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"></label>
+                            class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all before:content-none after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all after:content-none peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        </label>
                     </div>
                     <div class="!absolute left-3 top-[13px]">
                         <svg width="13" height="14" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,21 +100,23 @@
         <div class="all-blogs my-10 flex items-center justify-center gap-5 flex-wrap">
             <% locals.blogs.forEach(blog=> { %>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
-                    <img src="<%= blog.img %>" alt="Thumbnail Image" class="w-full h-64 object-cover">
+                    <a href="/blogs/blog/<%=blog._id%>">
+                        <img src="<%= blog.thumbnailImage %>" alt="Thumbnail Image" class="w-full h-64 object-cover">
+                    </a>
                     <div class="p-6">
                         <h2 class="text-2xl font-bold text-gray-800 mb-2">
                             <%= blog.title %>
                         </h2>
                         <p class="text-gray-700 leading-tight mb-4">
-                            <%= blog.subject %>
+                            <%= blog.previewText %>
                         </p>
                         <div class="flex justify-between items-center">
-                            <a href="/blogs/profile/<%= loggedInUser.email %>">
+                            <a href="/blogs/profile/<%= blog.createdBy.email %>">
                                 <div class="flex items-center">
-                                    <img src="<%= loggedInUser.profileImg %>" alt="Avatar"
+                                    <img src="<%= blog.createdBy.profileImg %>" alt="Avatar"
                                         class="w-8 h-8 rounded-full mr-2 object-cover">
                                     <span class="text-gray-800 font-semibold">
-                                        <%= blog.name %>
+                                        <%= blog.createdBy.name.firstName %> <%= blog.createdBy.name.lastName %>
                                     </span>
                                 </div>
                             </a>

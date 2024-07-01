@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
-
 // Schema
 const blogSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
-    subject: {
+    previewText: {
         type: String,
         required: true,
     },
@@ -14,22 +13,18 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    text: {
+    body: {
         type: String,
         required: true
     },
-    img: {
+    thumbnailImage: {
         type: String,
         default: "https://advisorretire.com/wp-content/plugins/pl-platform/engine/ui/images/default-landscape.png"
     },
     createdBy: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
-    name: {
-        type: String,
-        required: true
-    }
 }, { timestamps: true });
 const Blog = mongoose.model("blogs", blogSchema)
 module.exports = Blog

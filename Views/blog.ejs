@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Haven</title>
+    <link rel="stylesheet" href="/CSS/output.css">
+    <link rel="shortcut icon" href="/Images/LogoOneWithBg.jpg" type="image/x-icon">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body >
+    <!-- component -->
+    <div class="max-w-screen-lg mx-auto">
+        <main class="mt-10">
+            <div class="mb-4 md:mb-0 w-full mx-auto relative">
+                <div class="px-4 lg:px-0">
+                    <h2 class="text-4xl font-semibold text-gray-800 leading-tight">
+                        <%= locals.Viewblog.title %>
+                    </h2>
+                    <a href="#" class="py-2 text-green-700 inline-flex items-center justify-center mb-2">
+                        <%= locals.Viewblog.category %>
+                    </a>
+                </div>
+
+                <img src="<%= locals.Viewblog.thumbnailImage %>"
+                    class="w-full object-cover lg:rounded" style="height: 28em;" />
+            </div>
+
+            <div class="flex flex-col lg:flex-row lg:space-x-12">
+
+                <div class="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4">
+                    <pre> <%= locals.Viewblog.body %></pre>
+                </div>
+
+                <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
+                    <div class="p-4 border-t border-b md:border md:rounded">
+                        <div class="flex py-2">
+                            <img src="<%= locals.Viewblog.createdBy.profileImg %>"
+                                class="h-10 w-10 rounded-full mr-2 object-cover" />
+                            <div>
+                                <p class="font-semibold text-gray-700 text-sm"> <%= locals.Viewblog.createdBy.name.firstName %>  <%= locals.Viewblog.createdBy.name.lastName %></p>
+                                <p class="font-semibold text-gray-600 text-xs">  <%= locals.Viewblog.createdBy.role %> </p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 py-3">
+                            <%= locals.Viewblog.createdBy.bio %>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <!-- main ends here -->
+    </div>
+</body>
+
+</html>
