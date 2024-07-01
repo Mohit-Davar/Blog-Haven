@@ -3,8 +3,15 @@ const user = require("../Models/userModel.js")
 const { JWTGeneration } = require("../Services/userAuthentication.js")
 // function to handle User Signup
 async function handleUserSignUp(req, res) {
+    const options = {
+        httpOnly: true,
+        sameSite: 'None', secure: true,
+    }
     const body = req.body
     try {
+        if (body.remember) {
+            options.maxAge = 24 * 60 * 60 * 1000 * 40
+        }
         const result = await user.create({
             name: {
                 firstName: body.first_Name,
@@ -19,7 +26,7 @@ async function handleUserSignUp(req, res) {
             id: result._id
         }
         const token = JWTGeneration(payload)
-        res.cookie("token", token)
+        res.cookie("token", token, options)
         return res.status(201).redirect("/blogs")
     } catch (error) {
         if (error.code === 11000) { // MongoDB duplicate key error
@@ -34,6 +41,10 @@ async function handleUserSignUp(req, res) {
 // function to handle user Signin
 async function handleUserSignIn(req, res) {
     const body = req.body
+    const options = {
+        httpOnly: true,
+        sameSite: 'None', secure: true,
+    }
     try {
         const candidate = await user.findOne({
             email: body.email,
@@ -47,12 +58,15 @@ async function handleUserSignIn(req, res) {
             req.flash('error', 'Wrong Password')
             return res.redirect(`/user/login`)
         }
+        if (body.remember) {
+            options.maxAge = 24 * 60 * 60 * 1000 * 40
+        }
         const payload = {
             email: candidate.email,
             id: candidate._id
         }
         const token = JWTGeneration(payload)
-        res.cookie("token", token)
+        res.cookie("token", token , options)
         return res.redirect(`/blogs`)
     } catch (err) {
         req.flash('error', 'Internal Server Error')

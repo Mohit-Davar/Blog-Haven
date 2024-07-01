@@ -8,6 +8,7 @@ const JWTMiddleware = (req, res, next) => {
         return res.status(401).redirect(`/user/login`)
     }
     try {
+        
         const decodedPayload = jwt.verify(token, JWTSecretKey)
         req.userData = decodedPayload
         next()
