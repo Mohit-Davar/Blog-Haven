@@ -40,7 +40,7 @@
     </div>
     <h1 class="mx-auto w-fit my-10 text-white text-5xl break-words text-center font-Lobster">My Blogs</h1>
     <% if (locals.blogs) { %>
-        <div class="all-blogs flex items-center justify-center gap-5 flex-wrap">
+        <div class="all-blogs flex items-stretch justify-center gap-5 flex-wrap">
             <% locals.blogs.forEach(blog=> { %>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
                     <a href="/blogs/blog/<%=blog._id%>">
