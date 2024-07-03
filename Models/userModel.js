@@ -33,11 +33,7 @@ const userSchema = new mongoose.Schema({
     profileImg: {
         type: String,
         default: 'https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg'
-    },
-    blogs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'blogs'
-    }]
+    }
 }, { timestamps: true });
 // Encrypting The password
 userSchema.pre('save', async function (next) {

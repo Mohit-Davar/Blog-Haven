@@ -1,5 +1,6 @@
 const Blog = require("../Models/blogModel.js")
 const user = require("../Models/userModel.js")
+const comment = require("../Models/commentModel.js")
 
 // function to create new blog
 const handleBlogCreation = async (req, res) => {
@@ -35,7 +36,8 @@ const handleProfile = async (req, res) => {
         })
         return res.render("profile", {
             ProfileUser: profile,
-            blogs: allBlogs
+            blogs: allBlogs,
+            back: req.headers.referer
         })
     } catch (err) {
         req.flash('error', 'Internal Server Error')
@@ -63,22 +65,45 @@ const handleBlog = async (req, res) => {
         const blog = await Blog.findOne({
             _id: blogId
         }).populate("createdBy")
-        if(!blog){
+        if (!blog) {
             req.flash('error', 'No Such Profile Exsist!')
             return res.redirect(`/blogs`)
         }
+        const comments = await comment.find({
+            blog: blogId
+        }).populate("person")
         return res.render("blog", {
-            Viewblog: blog
+            Viewblog: blog,
+            blogComments: comments,
+            back: req.headers.referer
         })
     } catch (err) {
         req.flash('error', 'Internal Server Error')
         return res.redirect(`/blogs`)
     }
+}
 
+//function to make comment
+const handleComment = async (req, res) => {
+    const blogId = req.params.id
+    const body = req.body
+    try {
+        await comment.create({
+            content: body.text,
+            blog: blogId,
+            person: req.userData.id
+        })
+        return res.redirect(`/blogs/blog/${req.params.id}`)
+    } catch (err) {
+        console.log(err)
+        req.flash("error", "Internal Server Error")
+        return res.redirect(`/blogs/blog/${req.params.id}`)
+    }
 }
 module.exports = {
     handleBlogCreation,
     handleProfile,
     handleAllBlogs,
-    handleBlog
+    handleBlog,
+    handleComment
 }

@@ -2,7 +2,7 @@
 const express = require("express")
 const router = express.Router()
 
-const { handleBlogCreation, handleProfile, handleAllBlogs, handleBlog } = require("../Controllers/blogController.js")
+const { handleBlogCreation, handleProfile, handleAllBlogs, handleBlog ,handleComment} = require("../Controllers/blogController.js")
 const { handleProfileEdit } = require("../Controllers/userContoller.js")
 const upload = require("../Services/multer.js")
 
@@ -10,7 +10,9 @@ router.get("/", handleAllBlogs)
 
 router.get("/profile/:id", handleProfile)
 
-router.get("/blog/:id", handleBlog)
+router.route("/blog/:id")
+    .get(handleBlog)
+    .post(handleComment)
 
 router.route("/create")
     .get((req, res) => {
