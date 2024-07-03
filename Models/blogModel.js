@@ -25,6 +25,12 @@ const blogSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    views: [{
+        person: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user"
+        }
+    }]
 }, { timestamps: true });
 const Blog = mongoose.model("blogs", blogSchema)
 module.exports = Blog

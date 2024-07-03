@@ -2,11 +2,12 @@
 const express = require("express")
 const router = express.Router()
 
-const { handleBlogCreation, handleProfile, handleAllBlogs, handleBlog ,handleComment} = require("../Controllers/blogController.js")
+const { handleBlogCreation, handleProfile, handleAllBlogs, handleBlog, handleComment } = require("../Controllers/blogController.js")
 const { handleProfileEdit } = require("../Controllers/userContoller.js")
 const upload = require("../Services/multer.js")
 
-router.get("/", handleAllBlogs)
+router.route("/")
+    .get(handleAllBlogs)
 
 router.get("/profile/:id", handleProfile)
 

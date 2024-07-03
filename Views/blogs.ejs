@@ -89,10 +89,11 @@
                 </span>
             </button>
         </div>
+
         <div class="error text-red-600 font-Roboto mx-auto text-center">
             <% if (locals.error) { %>
                 <%= error %>
-            <% } %>
+                    <% } %>
         </div>
     </nav>
 
@@ -116,7 +117,8 @@
                                     <img src="<%= blog.createdBy.profileImg %>" alt="Avatar"
                                         class="w-8 h-8 rounded-full mr-2 object-cover">
                                     <span class="text-gray-800 font-semibold">
-                                        <%= blog.createdBy.name.firstName %> <%= blog.createdBy.name.lastName %>
+                                        <%= blog.createdBy.name.firstName %>
+                                            <%= blog.createdBy.name.lastName %>
                                     </span>
                                 </div>
                             </a>

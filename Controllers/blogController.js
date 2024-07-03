@@ -49,9 +49,9 @@ const handleAllBlogs = async (req, res) => {
     const query = req.query.query
     let allBlogs = null
     if (!query) {
-        allBlogs = await Blog.find().populate("createdBy")
+        allBlogs = await Blog.find().populate("createdBy").sort({ createdAt: -1 })
     } else {
-        allBlogs = await Blog.find({ $text: { $search: `${query}` } }).populate("createdBy")
+        allBlogs = await Blog.find({ $text: { $search: `${query}` } }).populate("createdBy").sort({createdAt: -1})
     }
     return res.render("blogs", {
         loggedInUser: req.userData,
@@ -69,6 +69,10 @@ const handleBlog = async (req, res) => {
             req.flash('error', 'No Such Profile Exsist!')
             return res.redirect(`/blogs`)
         }
+        if (!blog.createdBy.equals(req.userData.id)) {
+            blog.views.push({ person: req.userData.id })
+            await blog.save(); // Save the updated blog object
+        }
         const comments = await comment.find({
             blog: blogId
         }).populate("person")
@@ -78,11 +82,11 @@ const handleBlog = async (req, res) => {
             back: req.headers.referer
         })
     } catch (err) {
+        console.log(err)
         req.flash('error', 'Internal Server Error')
         return res.redirect(`/blogs`)
     }
 }
-
 //function to make comment
 const handleComment = async (req, res) => {
     const blogId = req.params.id
@@ -100,10 +104,11 @@ const handleComment = async (req, res) => {
         return res.redirect(`/blogs/blog/${req.params.id}`)
     }
 }
+//function to handle filter
 module.exports = {
     handleBlogCreation,
     handleProfile,
     handleAllBlogs,
     handleBlog,
-    handleComment
+    handleComment,
 }
