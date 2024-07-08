@@ -1,6 +1,8 @@
 const Blog = require("../Models/blogModel.js")
 const user = require("../Models/userModel.js")
 const comment = require("../Models/commentModel.js")
+require('dotenv').config()
+
 
 // function to create new blog
 const handleBlogCreation = async (req, res) => {
@@ -51,7 +53,7 @@ const handleAllBlogs = async (req, res) => {
     if (!query) {
         allBlogs = await Blog.find().populate("createdBy").sort({ createdAt: -1 })
     } else {
-        allBlogs = await Blog.find({ $text: { $search: `${query}` } }).populate("createdBy").sort({createdAt: -1})
+        allBlogs = await Blog.find({ $text: { $search: `${query}` } }).populate("createdBy").sort({ createdAt: -1 })
     }
     return res.render("blogs", {
         loggedInUser: req.userData,

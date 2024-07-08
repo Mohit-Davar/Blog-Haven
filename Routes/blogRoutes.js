@@ -17,7 +17,9 @@ router.route("/blog/:id")
 
 router.route("/create")
     .get((req, res) => {
-        return res.render("createform")
+        return res.render("createform", {
+            api: process.env.TinyMceID
+        })
     })
     .post(upload.single("file-upload"), handleBlogCreation)
 
