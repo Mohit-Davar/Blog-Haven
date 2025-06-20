@@ -7,7 +7,7 @@ Welcome to ***Blog Haven***, your go-to platform for writing, publishing, and sh
 * **Write and Publish Blogs:** Share your stories, ideas, and insights with the world.
 * **Connect with Others:**  Discover and engage with a diverse community of writers and readers.
 * **Profile Customization:** Personalize your profile to showcase your personality and interests.
-* **Engage with Content:** Appreciate or add comments on blogs to share your views and connect with authors.
+* **Engage with Content:** Appreciate or add comments on blogs to sharegg your views and connect with authors.
 * **Performance:** Get the number of views on your blog to estimate the reach it got
 
  ## Get Started
